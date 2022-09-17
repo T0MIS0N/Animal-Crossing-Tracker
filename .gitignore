@@ -1,0 +1,9 @@
+#Ignore database credentials in the api server
+*.env
+#Ignore node modules
+*/node_modules/
+#Ignore webscraper test files
+/Webscraper/*.json
+/Webscraper/*.txt
+#Ignore python cache files
+*.pyc
