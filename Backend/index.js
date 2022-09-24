@@ -5,6 +5,8 @@ import mongodb, { MongoClient } from "mongodb"
 import dotenv from "dotenv"
 //BugsDAO imports our class that lets us query the DB and filter the results
 import BugsDAO from "./dao/bugsDAO.js"
+import FishDAO from "./dao/fishDAO.js"
+import SeaCreaturesDAO from "./dao/seaCreaturesDAO.js"
 
 //The line below loads our environment variables into this file
 dotenv.config()
@@ -27,7 +29,10 @@ mongoClient.connect(
     process.exit(1)
 }).then(async client =>{
     //If connection is successful, we listen on our port and give confirmation in the log that the app is listening.
+    //On connection all DAO are injected which is necessary for their use.
     await BugsDAO.injectDB(client) //On connection we also inject the bugsDAO
+    await FishDAO.injectDB(client) //On connection we also inject the fishDAO
+    await SeaCreaturesDAO.injectDB(client) //On connection we also inject the seaCreatureDAO
     app.listen(port,()=>{
         console.log(`listening on port ${port}`)
     })

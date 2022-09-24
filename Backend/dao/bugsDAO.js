@@ -17,7 +17,7 @@ export default class BugsDao{
         }
     }
 
-    //This returns a list of all bugs in the DB.
+    //This returns a list of bugs in the DB based on filters.
     static async getBugs({
         //These 3 options are made-up atm.
         filters = null, //This holds the filters used to sort results.
@@ -66,6 +66,36 @@ export default class BugsDao{
         } catch (e){
             //If an error is encountered, the error is logged and an empty list is returned.
             console.error(`Unable to convert cursor to array or problem counting documents, ${e}`)
+            return {bugsList: [], totalNumBugs: 0}
+        }
+    }
+
+    //This returns a list of all bugs in the DB.
+    static async getAllBugs(){
+        //Define the query variable
+        let query
+
+        try{
+            //The query is set to all results from the DB query
+            query = await bugs
+                .find()
+        } catch (e){
+            //If there's an issue retrieving bugs, an empty list is returned and the error is logged.
+            console.error(`Unable to issue find command, ${e}`)
+            return {bugsList: [], totalNumBugs:0}
+        }
+
+        try{
+            //Set bug list to an array
+            const bugsList = await query.toArray()
+            //This variable counts the results from the query to find the total number of bugs.
+            const totalNumBugs = await bugs.countDocuments()
+
+            //Finally, the list of bugs and total number of bugs is returned.
+            return {bugsList, totalNumBugs}
+        } catch (e){
+            //If an error is encountered, the error is logged and an empty list is returned.
+            console.error(`Unable to convert query to array or problem counting documents, ${e}`)
             return {bugsList: [], totalNumBugs: 0}
         }
     }

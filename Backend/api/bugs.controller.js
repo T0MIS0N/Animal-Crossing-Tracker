@@ -39,4 +39,19 @@ export default class BugsController{
         //This line returns the API response to the user in JSON format.
         res.json(response)
     }
+
+    static async apiGetAllBugs(req,res,next){
+
+        //This const returns a bug list and total number of bugs from a query based on the supplied filters.
+        const {bugsList, totalNumBugs} = await BugsDAO.getAllBugs()
+
+        //This is the API response which is whats returned to the user calling the API.
+        //Basically, when the user navigates to the API URL, this data is what they see.
+        let response = {
+            bugs: bugsList, //This is the bugslist that's returned.
+            total_results: totalNumBugs, //This is the total amount of bugs
+        }
+        //This line returns the API response to the user in JSON format.
+        res.json(response)
+    }
 }
