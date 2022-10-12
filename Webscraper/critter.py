@@ -42,12 +42,12 @@ class Bug(Critter):
     def json(self):
         return f'''"Name":"{self.name}",
         "Description":"{self.description}",
-        "North Months":"{self.months_north}",
-        "South Months":"{self.months_south}",
+        "NorthMonths":"{self.months_north}",
+        "SouthMonths":"{self.months_south}",
         "Time":"{self.time}",
         "Location":"{self.location}",
         "Weather":"{self.weather}",
-        "Spawn Condition":"{self.spawn_condition}",
+        "SpawnCondition":"{self.spawn_condition}",
         "Price":{self.price}'''
 
 #The Fish class adds location, weather, and size variables as those are useful for finding fish
@@ -83,13 +83,13 @@ class Fish(Critter):
     def json(self):
         return f'''"Name":"{self.name}",
         "Description":"{self.description}",
-        "North Months":"{self.months_north}",
-        "South Months":"{self.months_south}",
+        "NorthMonths":"{self.months_north}",
+        "SouthMonths":"{self.months_south}",
         "Time":"{self.time}",
         "Location":"{self.location}",
         "Weather":"{self.weather}",
         "Size":"{self.size}",
-        "Spawn Condition":"{self.spawn_condition}",
+        "SpawnCondition":"{self.spawn_condition}",
         "Price":{self.price}'''
 
 #The Sea Creature class adds size and speed variables as those are useful for finding sea creatures
@@ -123,10 +123,10 @@ class Sea_Creature(Critter):
     def json(self):
         return f'''"Name":"{self.name}",
         "Description":"{self.description}",
-        "North Months":"{self.months_north}",
-        "South Months":"{self.months_south}",
+        "NorthMonths":"{self.months_north}",
+        "SouthMonths":"{self.months_south}",
         "Time":"{self.time}",
         "Size":"{self.size}",
         "Speed":"{self.speed}",
-        "Spawn Condition":"{self.spawn_condition}",
+        "SpawnCondition":"{self.spawn_condition}",
         "Price":{self.price}'''
