@@ -25,7 +25,21 @@ body{
 }
 
 .content{
-    margin: 4rem 8rem;
+    /*margin: 4rem 8rem;*/
+}
+
+.filter-pane{
+    background-color: #5c5cd6;
+    height: 100%;
+    color: white;
+}
+
+.critter-table{
+    display: grid;
+    grid-template-columns: 85% 15%;
+    align-items: center;
+    height: 100%;
+    padding: 4% 4%;
 }
 
 .grid{
@@ -35,7 +49,6 @@ body{
     align-items: center;
     background-color: #f8efdc;
     height: 100%;
-    padding: 4% 4%;
     overflow: auto;
 }
 
@@ -60,7 +73,7 @@ body{
 }
 
 #root, .root, .content{
-    height: 85%;
+    height: 90%;
 }
 
 html, body{
