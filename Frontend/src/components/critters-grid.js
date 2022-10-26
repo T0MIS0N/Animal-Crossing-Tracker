@@ -3,6 +3,13 @@ import "../Style.css";
 import CritterDataService from "../services/critter.js";
 import { Link } from "react-router-dom";
 
+var boolActiveToday = false;
+var boolActiveNow = false;
+var boolLocation = false;
+var boolWeather = false;
+var boolSpawnCondition = false;
+var boolPrice = false;
+
 const CritterGrid = props => {
 
   const [critters, setCritters] = useState([]);
@@ -39,12 +46,28 @@ const CritterGrid = props => {
         <div className="filter-pane">
           <h3>Filter</h3>
           <h4>Not Donated<input id="donated" type="checkbox"/></h4>
-          <h4>Available Today<input id="today" type="checkbox"/></h4>
-          <h4>Available Right Now<input id="right-now" type="checkbox"/></h4>
-          <h4>Location</h4>
-          <h4>Weather</h4>
-          <h4>Spawn Condition</h4>
-          <h4>Price</h4>
+          <h4>Available Today<input id="today" onClick={()=>{boolActiveToday = document.getElementById("today").checked}} type="checkbox"/></h4>
+          <h4>Available Right Now<input id="right-now" onClick={()=>{boolActiveNow = document.getElementById("right-now").checked}} type="checkbox"/></h4>
+          <h4>Location<input id="location" onClick={()=>{boolLocation = document.getElementById("location").checked}} type="checkbox"/></h4>
+          <h5>
+            <input type="radio" name="location" id="" value=""/>Anywhere 
+            <input type="radio" name="location" id="" value=""/>Trees 
+            <input type="radio" name="location" id="" value=""/>Tree Stumps<br/>
+            <input type="radio" name="location" id="" value=""/>Flowers 
+            <input type="radio" name="location" id="" value=""/>Rocks 
+            <input type="radio" name="location" id="" value=""/>Water 
+            <input type="radio" name="location" id="" value=""/>Etc. 
+          </h5>
+          <h4>Weather<input id="weather" onClick={()=>{boolWeather = document.getElementById("weather").checked}} type="checkbox"/></h4>
+          <h5>
+            <input type="radio" name="weather" id="" value=""/>Any Weather 
+            <input type="radio" name="weather" id="" value=""/>Absent in Rain 
+            <input type="radio" name="weather" id="" value=""/>Rain
+          </h5>
+          <h4>Spawn Condition<input id="spawn-condition" onClick={()=>{boolSpawnCondition = document.getElementById("spawn-condition").checked}} type="checkbox"/></h4>
+          <input type="range" min="0" max="100" value="0"/>
+          <h4>Price<input id="price" onClick={()=>{boolPrice = document.getElementById("price").checked}} type="checkbox"/></h4>
+          <input type="range" min="10" max="12000" value="10"/>
           <hr></hr>
           <h3>Sort</h3>
           <h4>Alphabetical</h4>
@@ -91,17 +114,33 @@ function CritterItem(critter) {
 }
 
 function filterCritters(critterArray){
-  if(document.readyState === "complete" && document.getElementById("today").checked)//TODO: Find best practices for javascript/react when one needs to call elements before they're rendered in HTML
-    {
-    var filteredArray = new Array
-    critterArray.map((critter) => {
-      if(isCritterActiveToday(critter, true))
-        filteredArray.push(critter)
-    })
-      return filteredArray
-    }else{
-      return critterArray
+  //If no filters are active, the original critter array is returned.
+  if(!boolActiveToday && !boolActiveNow)
+    return critterArray
+
+  //filteredArray holds all the critters that can pass all active filters.
+  var filteredArray = new Array()
+
+  //.map function goes through all the critters in the critterArray in a loop-like manner.
+  critterArray.map((critter)=>{
+
+    //First, the filters are checked to see if the program is filtering out critters that aren't going to be present today. If the filter is off, the critter automatically passes.
+    if(boolActiveToday){
+      //If the filter is active, the method to check if the critter is present this month is run. If the critter isn't present, this iteration of the loop is immediately stopped and the next iteration starts.
+      if(!isCritterActiveToday(critter, true))
+        return
     }
+
+    if(boolActiveNow)
+      if(!isCritterActiveNow(critter))
+        return
+  
+    //If the critter passes all active filters, it's added to the filteredArray
+    filteredArray.push(critter)
+  })
+
+  //The filtered array is returned after all critters have ran through the loop
+  return filteredArray
 }
 
 function isCritterActiveToday(critter, isNorthIsland){
@@ -190,6 +229,57 @@ function monthToNum(monthStr){
       return 10
     case "Dec":
       return 11
+  }
+}
+
+function isCritterActiveNow(critter){
+  if(critter.Time == "All day")
+    return true
+  var critterTime = critter.Time
+  var currentDate = new Date()
+  var currentHour = currentDate.getHours()
+  if(critterTime.includes("&")){
+    var timeArray = critterTime.split("&")
+    if(isInTimeRange(timeArray[0], currentHour) || isInTimeRange(timeArray[1], currentHour))
+      return true
+  }else{
+    if(isInTimeRange(critterTime, currentHour))
+      return true
+  }
+  return false
+}
+
+function isInTimeRange(timeRange, currentHour){
+  var timeArray = timeRange.split("–")
+  var timeNumArray = [hourToNum(timeArray[0]),hourToNum(timeArray[1])]
+  if(timeNumArray[0] < timeNumArray[1]){
+    if(timeNumArray[0]<=currentHour && timeNumArray[1]>currentHour)
+      return true
+  }
+  if(timeNumArray[0] > timeNumArray[1]){
+    if(currentHour >= timeNumArray[0] || currentHour < timeNumArray[1])
+      return true
+  }
+  return false
+}
+
+//This function turns a date from 12 hr format into a 24 hour number representation
+function hourToNum(hourStr){
+  if(hourStr.includes(" "))
+    hourStr = hourStr.replace(" ","")
+  //12:00 in 12hr format converts messily to 24, so those two values are brute forced here.
+  if(hourStr == "12AM")
+    return 0
+  if(hourStr == "12PM")
+    return 12
+  //To convert an AM time to 24hr, nothing needs to be done. The parsed string is returned.
+  if(hourStr.includes("AM")){
+    hourStr = hourStr.replace("AM","")
+    return parseInt(hourStr)
+  //To convert a PM time to 24hr, 12 hours are added to the time.
+  }else if(hourStr.includes("PM")){
+    hourStr = hourStr.replace("PM","")
+    return parseInt(hourStr) + 12
   }
 }
 
