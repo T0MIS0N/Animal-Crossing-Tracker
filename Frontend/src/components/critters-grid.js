@@ -3,6 +3,8 @@ import "../Style.css";
 import CritterDataService from "../services/critter.js";
 import { Link } from "react-router-dom";
 
+var critterType = 'bugs'
+
 var boolActiveToday = false;
 var boolActiveNow = false;
 var boolLocation = false;
@@ -16,16 +18,47 @@ const CritterGrid = props => {
 
   //TODO: Understand this hook
   useEffect(() => {
-    retrieveBugs();
+    if(critterType === 'bugs')
+      retrieveBugs();
+    else if(critterType === 'fish')
+      retrieveFish();
+    else if(critterType === 'sea-creatures')
+      retrieveSeaCreatures();
   });
 
   //TODO: Understand what this does
   const retrieveBugs = () => {
-    CritterDataService.getAll()
+    CritterDataService.getAllBugs()
       .then(response => {
         console.log(response.data);
         //This line sets the critters to the response's data. The .bugs part specifies it wants the array called "bugs"
         setCritters(response.data.bugs);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  };
+
+  //TODO: Understand what this does
+  const retrieveFish = () => {
+    CritterDataService.getAllFish()
+      .then(response => {
+        console.log(response.data);
+        //This line sets the critters to the response's data. The .bugs part specifies it wants the array called "bugs"
+        setCritters(response.data.fish);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  };
+
+  //TODO: Understand what this does
+  const retrieveSeaCreatures = () => {
+    CritterDataService.getAllSeaCreatures()
+      .then(response => {
+        console.log(response.data);
+        //This line sets the critters to the response's data. The .bugs part specifies it wants the array called "bugs"
+        setCritters(response.data.seaCreatures);
       })
       .catch(e => {
         console.log(e);
@@ -44,6 +77,7 @@ const CritterGrid = props => {
           })}
         </div>
         <div className="filter-pane">
+          <h3><button onClick={()=>critterType='bugs'}>Bugs</button><button onClick={()=>critterType='fish'}>Fish</button><button onClick={()=>critterType='sea-creatures'}>Sea Creatures</button></h3>
           <h3>Filter</h3>
           <h4>Not Donated<input id="donated" type="checkbox"/></h4>
           <h4>Available Today<input id="today" onClick={()=>{boolActiveToday = document.getElementById("today").checked}} type="checkbox"/></h4>
@@ -82,7 +116,12 @@ const CritterGrid = props => {
 
 //This function returns an HTML item for the critter grid.
 function CritterItem(critter) {
-  var imageName = "/Images/Insects/" + critter.Name + ".png"
+  if(critterType === 'bugs')
+    var imageName = "/Images/Insects/" + critter.Name + ".png"
+  if(critterType === 'fish')
+    var imageName = "/Images/Fish/" + critter.Name + ".png"
+  if(critterType === 'sea-creatures')
+    var imageName = "/Images/SeaCreatures/" + critter.Name + ".png"
   return (
     <div className="grid-item">
       <table className="grid-table">
@@ -99,10 +138,7 @@ function CritterItem(critter) {
             <hr />
             <h4>{critter.Time}</h4>
             <hr />
-            <h4>{critter.Location}</h4>
-            <hr />
-            <h4>{critter.Weather}</h4>
-            <hr />
+            {bugAndFishRows(critter)}
             <h4>{critter.SpawnCondition}</h4>
             <hr />
             <h4>{critter.Price}<img src="/Images/UI/BellsIcon.png" height="30px" width="30px"></img></h4>
@@ -111,6 +147,41 @@ function CritterItem(critter) {
       </table>
     </div>
   )
+}
+
+function bugAndFishRows(critter) {
+  if (critterType === 'bugs') {
+    return (
+      <div>
+        <h4>{critter.Location}</h4>
+        <hr />
+        <h4>{critter.Weather}</h4>
+        <hr />
+      </div>
+    )
+  }
+  if(critterType === 'fish'){
+    return (
+      <div>
+        <h4>{critter.Location}</h4>
+        <hr />
+        <h4>{critter.Weather}</h4>
+        <hr />
+        <h4>{critter.Size}</h4>
+        <hr />
+      </div>
+    )
+  }
+  if(critterType === 'sea-creatures'){
+    return (
+      <div>
+        <h4>{critter.Size}</h4>
+        <hr />
+        <h4>{critter.Speed}</h4>
+        <hr />
+      </div>
+    )
+  }
 }
 
 function filterCritters(critterArray){
@@ -136,6 +207,7 @@ function filterCritters(critterArray){
         return
   
     //If the critter passes all active filters, it's added to the filteredArray
+    //console.log(critter.Name)
     filteredArray.push(critter)
   })
 
