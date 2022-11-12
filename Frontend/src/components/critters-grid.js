@@ -5,12 +5,15 @@ import { Link } from "react-router-dom";
 
 var critterType = 'bugs'
 
+var boolDonated = false;
 var boolActiveToday = false;
 var boolActiveNow = false;
 var boolLocation = false;
 var boolWeather = false;
 var boolSpawnCondition = false;
 var boolPrice = false;
+
+var collectedArray = new Array()
 
 const CritterGrid = props => {
 
@@ -79,7 +82,7 @@ const CritterGrid = props => {
         <div className="filter-pane">
           <h3><button onClick={()=>critterType='bugs'}>Bugs</button><button onClick={()=>critterType='fish'}>Fish</button><button onClick={()=>critterType='sea-creatures'}>Sea Creatures</button></h3>
           <h3>Filter</h3>
-          <h4>Not Donated<input id="donated" type="checkbox"/></h4>
+          <h4>Not Donated<input id="donated" onClick={()=>{boolDonated = document.getElementById("donated").checked; console.log(collectedArray)}} type="checkbox"/></h4>
           <h4>Available Today<input id="today" onClick={()=>{boolActiveToday = document.getElementById("today").checked}} type="checkbox"/></h4>
           <h4>Available Right Now<input id="right-now" onClick={()=>{boolActiveNow = document.getElementById("right-now").checked}} type="checkbox"/></h4>
           <h4>Location<input id="location" onClick={()=>{boolLocation = document.getElementById("location").checked}} type="checkbox"/></h4>
@@ -142,6 +145,7 @@ function CritterItem(critter) {
             <h4>{critter.SpawnCondition}</h4>
             <hr />
             <h4>{critter.Price}<img src="/Images/UI/BellsIcon.png" height="30px" width="30px"></img></h4>
+            <h4>Donated <input type="checkbox" onClick={()=>collectedArray.push(critter.Name)}/></h4>
           </td>
         </tr>
       </table>
@@ -186,7 +190,7 @@ function bugAndFishRows(critter) {
 
 function filterCritters(critterArray){
   //If no filters are active, the original critter array is returned.
-  if(!boolActiveToday && !boolActiveNow)
+  if(!boolActiveToday && !boolActiveNow && !boolDonated)
     return critterArray
 
   //filteredArray holds all the critters that can pass all active filters.
@@ -205,6 +209,12 @@ function filterCritters(critterArray){
     if(boolActiveNow)
       if(!isCritterActiveNow(critter))
         return
+
+    if(boolDonated)
+      if(collectedArray.includes(critter.Name)){
+        console.log(collectedArray)
+        return
+      }
   
     //If the critter passes all active filters, it's added to the filteredArray
     //console.log(critter.Name)
