@@ -1,0 +1,7 @@
+Ran into trouble when checking the donated box on the critter cards. The critter would be removed and their checkmark would be added to the next critter even though it wasn't donated.
+
+    Solution: Make code that looks at the item after the one newly donated and remove its checkmark (find optimized and simple way to do this), also added code to change checkmarks as critter items are created.
+
+    Better Solution: Make it so when donated critters are being filtered out, pressing the donated button will uncheck donated and then remove the result. 
+
+    Best Solution Found: Add a key to the grid items so react better knows what components are what and when it is appropriate to update them or not. This cuts down on various bugs experienced and doesn't required any weird and inefficient fixes!

@@ -6,16 +6,15 @@ import FlowerGrid from "./components/flowers-grid"
 import Social from "./components/social";
 import Login from "./components/login";
 import Settings from "./components/settings";
+import About from "./components/about";
 
 function App() {
   return (
     <div className="root">
       <div className="navbar">
-        <div className="bar-items"><Link to="critters">Critters</Link></div>
-        <div className="bar-items"><Link to="flowers">Flowers</Link></div>
-        <div className="bar-items"><Link to ="social">Social</Link></div>
-        <div className="bar-items"><Link to ="login">Login</Link></div>
-        <div className="bar-items"><Link to ="settings">Settings</Link></div>
+        <div className="bar-items"><Link to="critters"><img className="navbar-image" src="/Images/UI/BugIcon.png"/></Link></div>
+        <div className="bar-items"><Link to="flowers"><img className="navbar-image" src="/Images/UI/FlowerIcon.png"/></Link></div>
+        <div className="bar-items"><Link to="about"><img className="navbar-image" src="/Images/UI/DiveIcon.png"/></Link></div>
       </div>
       <Routes>
         <Route path="critters" element={<CritterGrid/>}/>
@@ -23,6 +22,7 @@ function App() {
         <Route path="social" element={<Social/>}/>
         <Route path="login" element={<Login/>}/>
         <Route path="settings" element={<Settings/>}/>
+        <Route path="about" element={<About/>}/>
       </Routes>
     </div>
   );
