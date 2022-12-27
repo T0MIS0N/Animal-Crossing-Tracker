@@ -5,6 +5,7 @@ import "../Style.css"
 function FlowerGrid() {
   return (
     <div className="content">
+      <div className="critter-table">
       <div className="grid">
         <h1>Flower 1</h1>
         <h1>Flower 2</h1>
@@ -15,6 +16,7 @@ function FlowerGrid() {
         <h1>Flower 7</h1>
         <h1>Flower 8</h1>
         <h1>Flower 9</h1>
+      </div>
       </div>
     </div>
   );

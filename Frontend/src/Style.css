@@ -32,7 +32,7 @@ body{
 }
 
 .content{
-    /*margin: 4rem 8rem;*/
+    width:100%;
 }
 
 .critter-group{
@@ -47,27 +47,33 @@ white-space:nowrap;
     padding: 5px;
 }
 
-.critter-group a{
+.critter-group button{
     height:100%;
     position:relative;
     display:inline-block;
     padding: 0 5px;
+
+    border:none;
+    background:none;
 }
 
 .filter-div{
     width:100%;
     padding: 0 5px;
     display: flex;
-    justify-content:end;
+    justify-content:flex-end;
 }
 
-.filter-div a{
+.filter-div button{
 
     height:100%;
     position:relative;
     display:inline-flex;
-    justify-content:end;
-    width:100%;
+    justify-content:flex-end;
+    width:auto;
+
+    border:none;
+    background:none;
 }
 
 .filter-pane{
@@ -91,6 +97,7 @@ white-space:nowrap;
 .critter-table{
     height: 82%;
     padding: 4% 8% 0;
+    width:100%;
 }
 
 .grid{
@@ -101,6 +108,7 @@ white-space:nowrap;
     background-color: #f8efdc;
     height: 100%;
     overflow: auto;
+    width:100%
 }
 
 .grid-item h4, hr{
@@ -126,6 +134,7 @@ white-space:nowrap;
 #root, .root, .content{
     height: 98%;
     display:flex;
+    width:100%;
 }
 
 html, body{
