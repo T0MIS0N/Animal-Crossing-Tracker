@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../Style.css";
+import "./critter-grid.css";
 import Filter from "../services/filter";
 import CritterItem from "./critter-item";
 import FilterSettings from "./filter-settings";

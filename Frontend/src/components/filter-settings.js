@@ -1,3 +1,5 @@
+import "./filter-settings.css";
+
 export default class FilterPane {
     constructor(filter) {
         this.filter = filter;

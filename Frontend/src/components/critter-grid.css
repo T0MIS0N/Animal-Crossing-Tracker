@@ -1,0 +1,50 @@
+.critter-table{
+    height: 70%;
+    padding: 4% 8% 0;
+    width:100%;
+}
+
+.content{
+    width:100%;
+}
+
+.table-bar{
+    background-color: #3660EE;
+    height:8%;
+    display:flex;
+    padding: 5px;
+}
+
+.table-bar img{
+    object-fit:contain;
+    width:auto;
+    height:100%;
+    cursor: pointer;
+}
+
+.critter-group{
+    height:100%;
+    white-space:nowrap;
+    }
+    
+.critter-group button{
+        height:100%;
+        position:relative;
+        display:inline-block;
+        padding: 0 5px;
+        border:none;
+        background:none;
+}
+
+.grid{
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        background-color: #C8D3FC;
+        height: 100%;
+        overflow: auto;
+        width:96%;
+        padding:2%;
+        grid-row-gap:4%;
+        grid-column-gap:2%;
+}
