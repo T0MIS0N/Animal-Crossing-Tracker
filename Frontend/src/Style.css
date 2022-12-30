@@ -3,11 +3,11 @@
     width: 4%;
     padding:1% 0.5%;
     color:white;
-    background-color: #191b54;
+    background-color: #3660EE;
     display:flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 0px 5px 5px #4d5567;
+    box-shadow: 5px 0px 5px 5px #5a73b9;
     flex-direction: column;
 }
 
@@ -28,7 +28,7 @@
 }
 
 body{
-    background-color: #E4D7BC;
+    background-color: #fcf0c8;
 }
 
 .content{
@@ -41,7 +41,7 @@ white-space:nowrap;
 }
 
 .table-bar{
-    background-color: #5c5cd6;
+    background-color: #3660EE;
     height:8%;
     display:flex;
     padding: 5px;
@@ -95,7 +95,7 @@ white-space:nowrap;
 }
 
 .critter-table{
-    height: 82%;
+    height: 70%;
     padding: 4% 8% 0;
     width:100%;
 }
@@ -103,38 +103,23 @@ white-space:nowrap;
 .grid{
     display: grid;
     grid-template-columns: auto auto;
-    justify-content: space-between;
     align-items: center;
-    background-color: #f8efdc;
+    background-color: #C8D3FC;
     height: 100%;
     overflow: auto;
-    width:100%
+    width:96%;
+    padding:2%;
+    grid-row-gap:4%;
+    grid-column-gap:2%;
 }
 
-.grid-item h4, hr{
-    padding: 0;
-    margin: 0;
-}
 
-.info-cell{
-    height: 100%;
-    width: 100%;
-}
-
-.grid-item{
-    padding: 2%;
-    height: 90%;
-}
-
-.grid-table{
-    height: 100%;
-    background-color: #beebf8;
-}
 
 #root, .root, .content{
-    height: 98%;
+    height: 100%;
     display:flex;
     width:100%;
+    overflow:hidden;
 }
 
 html, body{

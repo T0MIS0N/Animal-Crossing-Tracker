@@ -1,0 +1,72 @@
+.grid-item h4{
+    padding: 1%;
+    margin: 0;
+}
+
+.grid-item{
+    height: 100%;
+}
+
+.grid-table{
+    height: 100%;
+    width:100%;
+    box-shadow: 5px 5px 5px 2px #5a73b9;
+}
+
+.critter-donate{
+    border-radius:0px 0px 10px 10px;
+}
+
+table{
+    border-radius:10px;
+    border-spacing:0px;
+}
+
+th, td{
+    border-spacing:1px;
+}
+
+th{
+    border-radius:10px 10px 0 0px;
+    font-weight:bold;
+}
+
+.critter-donate h4{
+    text-align:right;
+}
+
+.critter-desc{
+    font-style:italic;
+    text-align:center;
+    font-weight:none;
+}
+
+.bell-img{
+    height:25px;
+    width:25px;
+    padding:0px 5px;
+    margin:-5px;
+}
+
+table, th, td, .grid-table{
+    background-color:#c4b695;
+    border-color:#c4b695;
+    border-style:solid;
+}
+
+.table-content, .critter-image{
+    background-color: #fcf0c8;
+}
+
+.critter-name, .critter-donate, .critter-desc{
+    background-color:#3660EE;
+}
+
+.table-label{
+    background-color: #C8D3FC;
+    text-align:right;
+}
+
+h2{
+    margin:1%;
+}

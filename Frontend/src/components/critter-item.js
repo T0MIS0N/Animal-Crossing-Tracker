@@ -1,3 +1,5 @@
+import "./critter-item.css"
+
 //This function returns an HTML item for the critter grid.
 export default class CritterItem {
     constructor(filter) {
@@ -18,65 +20,84 @@ export default class CritterItem {
             <div className="grid-item" key={critter.Name + "Item"}>
                 <table className="grid-table">
                     <tbody>
+                        <tr><th colSpan={3} className="critter-name"><h2>{critter.Name}</h2></th></tr>
+                        <tr><td colSpan={3} className="critter-desc"><h4>{critter.Description}</h4></td></tr>
                         <tr>
-                            <td>
-                                <img src={imageName} alt={critter.Name}></img>
-                            </td>
-                            <td className="info-cell">
-                                <h4>{critter.Name}</h4>
-                                <hr />
-                                <h4>{critter.Description}</h4>
-                                <hr />
-                                <h4>{critter.NorthMonths}</h4>
-                                <hr />
-                                <h4>{critter.Time}</h4>
-                                <hr />
-                                {this.bugAndFishRows(critter)}
-                                <h4>{critter.SpawnCondition}</h4>
-                                <hr />
-                                <h4>{critter.Price}<img src="/Images/UI/BellsIcon.png" alt="bells" height="30px" width="30px"></img></h4>
-                                {this.setDonatedCheckHTML(critter.Name)}
-                            </td>
+                            <td rowSpan={this.getImageRowSpan()} className="critter-image"><img src={imageName} alt={critter.Name}></img></td>
+                            <td className="table-label"><h4>Months Active</h4></td>
+                            <td className="table-content"><h4>{critter.NorthMonths}</h4></td>
                         </tr>
+                        <tr>
+                            <td className="table-label"><h4>Hours Active</h4></td>
+                            <td className="table-content"><h4>{critter.Time}</h4></td>
+                        </tr>
+                        {this.getLocationRow(critter)}
+                        {this.getWeatherRow(critter)}
+                        {this.getSpeedRow(critter)}
+                        {this.getSizeRow(critter)}
+                        <tr>
+                            <td className="table-label"><h4>Spawn Condition</h4></td>
+                            <td className="table-content"><h4>{critter.SpawnCondition}</h4></td>
+                        </tr>
+                        <tr>
+                            <td className="table-label"><h4>Sell Price</h4></td>
+                            <td className="table-content"><h4>{critter.Price}<img src="/Images/UI/BellsIcon.png" alt="bells" className="bell-img"></img></h4></td>
+                        </tr>
+                        <tr><td colSpan={3} className="critter-donate">{this.setDonatedCheckHTML(critter.Name)}</td></tr>
                     </tbody>
                 </table>
             </div>
         )
     }
 
-    bugAndFishRows(critter) {
-        if (this.filter.critterType === 'bugs') {
-            return (
-                <div>
-                    <h4>{critter.Location}</h4>
-                    <hr />
-                    <h4>{critter.Weather}</h4>
-                    <hr />
-                </div>
-            )
+    getImageRowSpan() {
+        if (this.filter.critterType === "fish")
+            return 7
+        return 6
+    }
+
+    getLocationRow(critter) {
+        if (this.filter.critterType === "sea-creatures") {
+            return
         }
-        if (this.filter.critterType === 'fish') {
+        return (
+            <tr>
+                <td className="table-label"><h4>Location</h4></td>
+                <td className="table-content"><h4>{critter.Location}</h4></td>
+            </tr>
+        )
+    }
+
+    getWeatherRow(critter) {
+        if (this.filter.critterType === "sea-creatures")
+            return
+        return (
+            <tr>
+                <td className="table-label"><h4>Weather</h4></td>
+                <td className="table-content"><h4>{critter.Weather}</h4></td>
+            </tr>
+        )
+    }
+
+    getSizeRow(critter) {
+        if (this.filter.critterType === "bugs")
+            return
+        return (
+            <tr>
+                <td className="table-label"><h4>Size</h4></td>
+                <td className="table-content"><h4>{critter.Size}</h4></td>
+            </tr>
+        )
+    }
+
+    getSpeedRow(critter) {
+        if (this.filter.critterType === "sea-creatures")
             return (
-                <div>
-                    <h4>{critter.Location}</h4>
-                    <hr />
-                    <h4>{critter.Weather}</h4>
-                    <hr />
-                    <h4>{critter.Size}</h4>
-                    <hr />
-                </div>
+                <tr>
+                    <td className="table-label"><h4>Speed</h4></td>
+                    <td className="table-content"><h4>{critter.Speed}</h4></td>
+                </tr>
             )
-        }
-        if (this.filter.critterType === 'sea-creatures') {
-            return (
-                <div>
-                    <h4>{critter.Size}</h4>
-                    <hr />
-                    <h4>{critter.Speed}</h4>
-                    <hr />
-                </div>
-            )
-        }
     }
 
     setDonatedCheckHTML(critterName) {
