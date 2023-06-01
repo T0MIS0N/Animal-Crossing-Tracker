@@ -9,11 +9,11 @@ export default class CritterItem {
     critterCard(critter) {
         var imageName = ""
         if (this.filter.critterType === 'bugs')
-            imageName = "/Images/Insects/" + critter.Name + ".png"
+            imageName = "./Images/Insects/" + critter.Name + ".png"
         if (this.filter.critterType === 'fish')
-            imageName = "/Images/Fish/" + critter.Name + ".png"
+            imageName = "./Images/Fish/" + critter.Name + ".png"
         if (this.filter.critterType === 'sea-creatures')
-            imageName = "/Images/SeaCreatures/" + critter.Name + ".png"
+            imageName = "./Images/SeaCreatures/" + critter.Name + ".png"
         return (
             //This key attribute on the grid items is ESSENTIAL to let the app know which component is which to allow it to
             //Understand what to rerender and when.

@@ -13,10 +13,10 @@ function App() {
   return (
     <div className="root">
       <div className="navbar">
-        <div className="bar-items"><Link to="critters"><img className="navbar-image" alt="" src="/Images/UI/BugIcon.png"/></Link></div>
-        <div className="bar-items"><Link to="art"><img className="navbar-image" alt="" src="/Images/UI/DiveIcon.png"/></Link></div>
-        <div className="bar-items"><Link to="flowers"><img className="navbar-image" alt="" src="/Images/UI/FlowerIcon.png"/></Link></div>
-        <div className="bar-items"><Link to="about"><img className="navbar-image" alt="" src="/Images/UI/DiveIcon.png"/></Link></div>
+        <div className="bar-items"><Link to="critters"><img className="navbar-image" alt="" src="./Images/UI/BugIcon.png"/></Link></div>
+        <div className="bar-items"><Link to="art"><img className="navbar-image" alt="" src="./Images/UI/DiveIcon.png"/></Link></div>
+        <div className="bar-items"><Link to="flowers"><img className="navbar-image" alt="" src="./Images/UI/FlowerIcon.png"/></Link></div>
+        <div className="bar-items"><Link to="about"><img className="navbar-image" alt="" src="./Images/UI/DiveIcon.png"/></Link></div>
       </div>
       <Routes>
         <Route path="critters" element={<CritterGrid/>}/>
