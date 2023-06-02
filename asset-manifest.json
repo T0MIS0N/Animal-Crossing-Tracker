@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Animal-Crossing-Tracker/static/css/main.e8261be5.css",
-    "main.js": "/Animal-Crossing-Tracker/static/js/main.21203ebc.js",
+    "main.js": "/Animal-Crossing-Tracker/static/js/main.307e90e6.js",
     "static/js/787.cda612ba.chunk.js": "/Animal-Crossing-Tracker/static/js/787.cda612ba.chunk.js",
     "index.html": "/Animal-Crossing-Tracker/index.html",
     "main.e8261be5.css.map": "/Animal-Crossing-Tracker/static/css/main.e8261be5.css.map",
-    "main.21203ebc.js.map": "/Animal-Crossing-Tracker/static/js/main.21203ebc.js.map",
+    "main.307e90e6.js.map": "/Animal-Crossing-Tracker/static/js/main.307e90e6.js.map",
     "787.cda612ba.chunk.js.map": "/Animal-Crossing-Tracker/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e8261be5.css",
-    "static/js/main.21203ebc.js"
+    "static/js/main.307e90e6.js"
   ]
 }
